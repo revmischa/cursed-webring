@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Nerko One", "Roboto",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

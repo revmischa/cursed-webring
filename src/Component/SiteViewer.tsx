@@ -22,10 +22,15 @@ const SiteViewer = (props: ISiteViewerProps) => {
 
   if (!currentSite?.url) return null;
 
+  const searchParams = new URLSearchParams({ url: currentSite.url });
+  const proxiedUrl = new URL(
+    `https://0yzvtxmzhc.execute-api.eu-west-1.amazonaws.com/prod/proxy?${searchParams}`
+  );
+
   return (
     <iframe
       title="Cursed Frame"
-      src={currentSite.url}
+      src={proxiedUrl.toString()}
       className={classes.iframe}
     />
   );

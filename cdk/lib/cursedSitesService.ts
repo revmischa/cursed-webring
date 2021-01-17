@@ -17,7 +17,7 @@ export class CusedSitesService extends core.Construct {
     const sitesResource = api.root.addResource("sites");
 
     // get all sites
-    const handler = new nodejsLambda.NodejsFunction(
+    const getAllSitesHandler = new nodejsLambda.NodejsFunction(
       this,
       "GetCursedSitesHandler",
       {
@@ -25,6 +25,23 @@ export class CusedSitesService extends core.Construct {
         handler: "getAllHandler",
       }
     );
-    sitesResource.addMethod("GET", new apigateway.LambdaIntegration(handler));
+    sitesResource.addMethod(
+      "GET",
+      new apigateway.LambdaIntegration(getAllSitesHandler)
+    );
+
+    const proxyResource = api.root.addResource("proxy");
+    const proxySiteHandler = new nodejsLambda.NodejsFunction(
+      this,
+      "ProxySiteHandler",
+      {
+        entry: "resources/proxy.ts",
+        handler: "proxySiteHandler",
+      }
+    );
+    proxyResource.addMethod(
+      "GET",
+      new apigateway.LambdaIntegration(proxySiteHandler)
+    );
   }
 }
