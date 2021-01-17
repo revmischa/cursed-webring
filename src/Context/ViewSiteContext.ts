@@ -32,7 +32,7 @@ export function useNewViewSiteContext() {
       ...ctx,
       currentSite: newSite,
     }));
-  }, [handleViewNextSite]);
+  }, []);
 
   // create our ViewSiteContext
   const [
