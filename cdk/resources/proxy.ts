@@ -10,6 +10,7 @@ export async function proxySiteHandler(event: APIGatewayProxyEvent) {
   if (
     referrer &&
     (referrer.startsWith("https://cursed.netlify.app") ||
+      referrer.startsWith("https://master--cursed-webring.netlify.app") ||
       referrer.startsWith("http://localhost"))
   ) {
     if (!proxyUrl) {

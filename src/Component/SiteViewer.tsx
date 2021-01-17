@@ -2,6 +2,8 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { ViewSiteContext } from "../Context/ViewSiteContext";
 
+const proxyEnabled = false;
+
 const useStyles = makeStyles({
   iframe: {
     margin: 0,
@@ -22,18 +24,15 @@ const SiteViewer = (props: ISiteViewerProps) => {
 
   if (!currentSite?.url) return null;
 
-  const searchParams = new URLSearchParams({ url: currentSite.url });
-  const proxiedUrl = new URL(
-    `https://0yzvtxmzhc.execute-api.eu-west-1.amazonaws.com/prod/proxy?${searchParams}`
-  );
+  let url = currentSite.url;
+  if (proxyEnabled) {
+    const searchParams = new URLSearchParams({ url: currentSite.url });
+    url = new URL(
+      `https://0yzvtxmzhc.execute-api.eu-west-1.amazonaws.com/prod/proxy?${searchParams}`
+    ).toString();
+  }
 
-  return (
-    <iframe
-      title="Cursed Frame"
-      src={proxiedUrl.toString()}
-      className={classes.iframe}
-    />
-  );
+  return <iframe title="Cursed Frame" src={url} className={classes.iframe} />;
 };
 
 export default SiteViewer;
