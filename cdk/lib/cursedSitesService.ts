@@ -1,17 +1,11 @@
 import * as core from "@aws-cdk/core";
 import * as apigateway from "@aws-cdk/aws-apigateway";
-import * as lambda from "@aws-cdk/aws-lambda";
+import * as nodejsLambda from "@aws-cdk/aws-lambda-nodejs";
 // import { TypeScriptCode } from "@clouden-cdk/aws-lambda-typescript";
 
 export class CusedSitesService extends core.Construct {
   constructor(scope: core.Construct, id: string) {
     super(scope, id);
-
-    const handler = new lambda.Function(this, "GetCursedSitesHandler", {
-      runtime: lambda.Runtime.NODEJS_12_X,
-      code: lambda.Code.fromAsset("lib/resources"),
-      handler: "cursedSites.getAll",
-    });
 
     const api = new apigateway.RestApi(this, "cursed-api", {
       restApiName: "Cursed Service",
@@ -20,15 +14,17 @@ export class CusedSitesService extends core.Construct {
       },
     });
 
-    const getAllCursedSitesIntegration = new apigateway.LambdaIntegration(
-      handler,
+    const sitesResource = api.root.addResource("sites");
+
+    // get all sites
+    const handler = new nodejsLambda.NodejsFunction(
+      this,
+      "GetCursedSitesHandler",
       {
-        requestTemplates: { "application/json": '{ "statusCode": "200" }' },
+        entry: "resources/cursedSites.ts",
+        handler: "getAllHandler",
       }
     );
-
-    const sitesResource = api.root.addResource("sites");
-    // sitesResource.defaultCorsPreflightOptions = CORS;
-    sitesResource.addMethod("GET", getAllCursedSitesIntegration);
+    sitesResource.addMethod("GET", new apigateway.LambdaIntegration(handler));
   }
 }

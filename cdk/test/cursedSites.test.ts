@@ -1,13 +1,16 @@
 import axios from "axios";
-// // eslint-disable-next-line @typescript-eslint/no-any
-import { getAllAndParse } from "../resources/cursedSites"; // tslint:disable-line
+import { getAllAndParse } from "../resources/cursedSites";
+
 jest.mock("axios");
 
 it("fetches", async () => {
-  (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve({}));
+  (axios.get as jest.Mock).mockResolvedValue({
+    data: `http://rapturenow.com/,Rapture Now,"153,000 Souls die every day. Most go to hell."`,
+  });
 
   const res = await getAllAndParse();
   console.log(res);
+  expect(res).toMatchObject([{ title: "Rapture Now" }]);
 
   expect(axios.get).toHaveBeenCalled();
 });
