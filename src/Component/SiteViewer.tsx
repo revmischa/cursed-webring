@@ -32,7 +32,14 @@ const SiteViewer = (props: ISiteViewerProps) => {
     ).toString();
   }
 
-  return <iframe title="Cursed Frame" src={url} className={classes.iframe} />;
+  return (
+    <iframe
+      sandbox="allow-downloads allow-modals allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation"
+      title="Cursed Frame"
+      src={url}
+      className={classes.iframe}
+    />
+  );
 };
 
 export default SiteViewer;
