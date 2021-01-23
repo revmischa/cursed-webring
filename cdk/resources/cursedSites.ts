@@ -1,7 +1,15 @@
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import axios from "axios";
+import { saveSubmission } from "./db";
+import { webhook } from "./slack";
+
 const csvparse = require("csv-parse/lib/sync");
 
 type Row = Record<string, string>;
+
+/**
+ * Fetch all cursed sites
+ */
 export async function getAllHandler() {
   let records = await getAllAndParse();
   records = shuffle(records);
@@ -26,4 +34,27 @@ export async function getAllAndParse(): Promise<Row[]> {
 
 function shuffle(array: any[]) {
   return array.sort(() => Math.random() - 0.5);
+}
+
+/**
+ * User submits a site to the webring
+ */
+export async function submitHandler(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const params = JSON.parse(event.body!);
+
+  await Promise.all([
+    saveSubmission(params.url, params.submitter, params.title),
+    webhook.send({
+      text: `URL: ${params.url}
+Title: ${params.title}
+Submitter: ${params.submitter}`,
+    }),
+  ]);
+
+  return {
+    statusCode: 201,
+    body: "ok",
+  };
 }
