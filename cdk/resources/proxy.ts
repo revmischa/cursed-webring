@@ -2,7 +2,7 @@ import axios from "axios";
 import { APIGatewayProxyEvent } from "aws-lambda";
 
 export async function proxySiteHandler(event: APIGatewayProxyEvent) {
-  const proxyUrl = event.queryStringParameters.url;
+  const proxyUrl = event.queryStringParameters!.url;
   const headers = event.headers;
   console.log(headers);
   const referrer = headers.Referer;
