@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import axios from "axios";
 import { saveSubmission } from "./db";
-import { webhook } from "./slack";
+import { sendToWebhook } from "./slack";
 import { ISubmissionParams } from "../../src/Model/Submission";
 
 const csvparse = require("csv-parse/lib/sync");
@@ -49,7 +49,7 @@ export async function submitHandler(
 
   await Promise.all([
     saveSubmission(params),
-    webhook.send({
+    sendToWebhook({
       text: `URL: ${params.url}
 Title: ${params.title}
 Submitter: ${params.submitter}`,

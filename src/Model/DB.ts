@@ -51,7 +51,9 @@ export class Site implements ISite {
   static async populate() {
     const req = new Request(cursedSitesUrl, { mode: "cors" });
     const res = await fetch(req);
-    const allFetchedSites: ISite[] = await res.json();
+    const allFetchedSites: ISite[] = (await res.json()).filter(
+      (site: ISite) => site.url
+    );
     console.debug("Fetched", allFetchedSites);
 
     // merge fetched with existing sites
