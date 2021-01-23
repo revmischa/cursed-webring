@@ -1,7 +1,6 @@
 import Dexie from "dexie";
 
-const cursedSitesUrl =
-  "https://0yzvtxmzhc.execute-api.eu-west-1.amazonaws.com/prod/sites/";
+const cursedSitesUrl = `${process.env.REACT_APP_API_BASE}/sites/`;
 
 class CursedDB extends Dexie {
   sites: Dexie.Table<ISite, number>;

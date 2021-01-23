@@ -12,6 +12,7 @@
     "@types/node": "^12.19.14",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "dexie": "^3.0.3",
     "react": "^17.0.1",

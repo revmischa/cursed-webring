@@ -2,10 +2,15 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import axios from "axios";
 import { saveSubmission } from "./db";
 import { webhook } from "./slack";
+import { ISubmissionParams } from "../../src/Model/Submission";
 
 const csvparse = require("csv-parse/lib/sync");
 
 type Row = Record<string, string>;
+
+const CORSHeaders = {
+  "Access-Control-Allow-Origin": "*",
+};
 
 /**
  * Fetch all cursed sites
@@ -16,9 +21,7 @@ export async function getAllHandler() {
   return {
     statusCode: 200,
     body: JSON.stringify(records),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
+    headers: CORSHeaders,
   };
 }
 
@@ -42,10 +45,10 @@ function shuffle(array: any[]) {
 export async function submitHandler(
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
-  const params = JSON.parse(event.body!);
+  const params: ISubmissionParams = JSON.parse(event.body!);
 
   await Promise.all([
-    saveSubmission(params.url, params.submitter, params.title),
+    saveSubmission(params),
     webhook.send({
       text: `URL: ${params.url}
 Title: ${params.title}
@@ -56,5 +59,6 @@ Submitter: ${params.submitter}`,
   return {
     statusCode: 201,
     body: "ok",
+    headers: CORSHeaders,
   };
 }
