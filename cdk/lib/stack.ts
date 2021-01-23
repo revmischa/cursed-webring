@@ -12,6 +12,6 @@ export class CursedStack extends cdk.Stack {
     new CursedSitesService(this, "CursedSiteServices", {
       submissionsTable: dbStack.submissionsTable,
     });
-    new CursedMirror(this, "CursedSiteMirrorCDN");
+    // new CursedMirror(this, "CursedSiteMirrorCDN");
   }
 }
