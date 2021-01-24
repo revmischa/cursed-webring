@@ -17,7 +17,7 @@ const CORSHeaders = {
  */
 export async function getAllHandler() {
   let records = await getAllAndParse();
-  records = shuffle(records);
+  records = shuffle(records).filter((r) => r && r.url);
   return {
     statusCode: 200,
     body: JSON.stringify(records),
