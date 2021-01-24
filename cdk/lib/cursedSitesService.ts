@@ -4,6 +4,7 @@ import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs";
 import { LambdaIntegration, RestApi } from "@aws-cdk/aws-apigateway";
 import * as sm from "@aws-cdk/aws-secretsmanager";
 import { Table } from "@aws-cdk/aws-dynamodb";
+import { CfnOutput } from "@aws-cdk/core";
 
 const slackWebhookSecret =
   "arn:aws:secretsmanager:eu-west-1:178183757879:secret:cursed/slack_webhook_url-MwQ0dY";
@@ -70,5 +71,10 @@ export class CursedSitesService extends core.Construct {
     );
     props.submissionsTable.grantWriteData(submitSiteHandler);
     sitesResource.addMethod("POST", new LambdaIntegration(submitSiteHandler));
+
+    // outputs
+    new CfnOutput(this, `SitesEndpoint`, {
+      value: api.urlForPath(sitesResource.path),
+    });
   }
 }
