@@ -28,7 +28,7 @@ const SiteViewer = (props: ISiteViewerProps) => {
   if (proxyEnabled) {
     const searchParams = new URLSearchParams({ url: currentSite.url });
     url = new URL(
-      `https://0yzvtxmzhc.execute-api.eu-west-1.amazonaws.com/prod/proxy?${searchParams}`
+      `${process.env.REACT_APP_API_BASE}/proxy?${searchParams}`
     ).toString();
   }
 

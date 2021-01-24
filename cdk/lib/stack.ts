@@ -7,10 +7,9 @@ export class CursedStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const dbStack = new CursedDB(this, "CursedDB");
-
+    const db = new CursedDB(this, "CursedDB");
     new CursedSitesService(this, "CursedSiteServices", {
-      submissionsTable: dbStack.submissionsTable,
+      submissionsTable: db.submissionsTable,
     });
     new CursedMirror(this, "CursedSiteMirrorCDN");
   }

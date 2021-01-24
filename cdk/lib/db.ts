@@ -1,9 +1,8 @@
 import * as core from "@aws-cdk/core";
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
-import { Table } from "@aws-cdk/aws-dynamodb";
 
 export class CursedDB extends core.Construct {
-  submissionsTable: Table;
+  submissionsTable: dynamodb.Table;
 
   constructor(scope: core.Construct, id: string) {
     super(scope, id);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { saveSubmission } from "./db";
 import { sendToWebhook } from "./slack";
 import { ISubmissionParams } from "../../src/Model/Submission";
-
+import { shuffle } from "./util";
 const csvparse = require("csv-parse/lib/sync");
 
 type Row = Record<string, string>;
@@ -25,6 +25,9 @@ export async function getAllHandler() {
   };
 }
 
+/**
+ * Grab site list from google doc
+ */
 export async function getAllAndParse(): Promise<Row[]> {
   const res = await axios.get(
     "https://docs.google.com/spreadsheets/d/1ehUKvA3bdcZmYnPxTMgoQeOKSkqdt0N10f4HK8rk_PM/export?format=csv"
@@ -33,10 +36,6 @@ export async function getAllAndParse(): Promise<Row[]> {
   return csvparse(res.data, {
     columns: ["url", "title", "description"],
   });
-}
-
-function shuffle(array: any[]) {
-  return array.sort(() => Math.random() - 0.5);
 }
 
 /**

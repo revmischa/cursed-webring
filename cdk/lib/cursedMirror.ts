@@ -11,7 +11,7 @@ export class CursedMirror extends core.Construct {
   constructor(scope: core.Construct, id: string) {
     super(scope, id);
 
-    const distribution = new CloudFrontWebDistribution(this, "cursed-mirrors", {
+    new CloudFrontWebDistribution(this, "cursed-mirrors", {
       originConfigs: [
         {
           customOriginSource: {

@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { ViewSiteContext } from "../Context/ViewSiteContext";
 import classNames from "classnames";
-import { Dialog, DialogContent } from "@material-ui/core";
 import SubmitForm from "./SubmitForm";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const useStyles = makeStyles({
   root: {
