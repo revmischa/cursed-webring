@@ -16,6 +16,19 @@ const useStyles = makeStyles({
     height: "100vh",
     overflow: "hidden",
   },
+  loadingContainer: {
+    margin: 0,
+    padding: 0,
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  spinner: {
+    width: 128,
+    height: 128,
+  },
 });
 
 function App() {
@@ -34,7 +47,9 @@ function App() {
   return (
     <main className={classes.main}>
       {isDBLoading || !viewSiteContext.currentSite ? (
-        <CircularProgress size={128} />
+        <div className={classes.loadingContainer}>
+          <CircularProgress size={128} className={classes.spinner} />
+        </div>
       ) : (
         <ViewSiteContext.Provider value={viewSiteContext}>
           <SiteViewer />
