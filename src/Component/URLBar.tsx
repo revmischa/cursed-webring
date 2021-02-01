@@ -5,8 +5,8 @@ import { ViewSiteContext } from "../Context/ViewSiteContext";
 const useStyles = makeStyles({
   urlBar: {
     position: "absolute",
-    top: 10,
-    left: 10,
+    top: 5,
+    left: 5,
     margin: "auto auto auto auto",
     backgroundColor: "rgba(1,0.6,1,0.2)",
     color: "purple",
