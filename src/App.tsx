@@ -8,6 +8,7 @@ import {
 } from "./Context/ViewSiteContext";
 import { useLoadDatabase } from "./Hook/DBLoader";
 import { makeStyles } from "@material-ui/styles";
+import URLBar from "./Component/URLBar";
 
 const useStyles = makeStyles({
   main: {
@@ -52,6 +53,7 @@ function App() {
         </div>
       ) : (
         <ViewSiteContext.Provider value={viewSiteContext}>
+          <URLBar />
           <SiteViewer />
           <Controls />
         </ViewSiteContext.Provider>

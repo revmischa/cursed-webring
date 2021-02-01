@@ -30,14 +30,14 @@ interface IControlsProps {}
 
 const Controls = (props: IControlsProps) => {
   const classes = useStyles();
-  const viewSiteCtx = React.useContext(ViewSiteContext);
+  const { viewNextSite, viewPrevSite } = React.useContext(ViewSiteContext);
 
   const handleClickPrev = React.useCallback(() => {
-    viewSiteCtx.viewPrevSite();
-  }, [viewSiteCtx]);
+    viewPrevSite();
+  }, [viewPrevSite]);
   const handleClickNext = React.useCallback(() => {
-    viewSiteCtx.viewNextSite();
-  }, [viewSiteCtx]);
+    viewNextSite();
+  }, [viewNextSite]);
 
   const [submitDialogVisible, setSubmitDialogVisible] = React.useState(false);
 
