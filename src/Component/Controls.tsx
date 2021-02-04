@@ -56,7 +56,7 @@ const Controls = (props: IControlsProps) => {
         onClick={handleClickPrev}
         className={classNames(classes.glowBtn, classes.prevBtn)}
       >
-        🤛
+        ←
       </Button>
 
       <Button
@@ -75,7 +75,7 @@ const Controls = (props: IControlsProps) => {
         onClick={handleClickNext}
         className={classNames(classes.glowBtn, classes.nextBtn)}
       >
-        🤜
+        →
       </Button>
     </div>
   );
