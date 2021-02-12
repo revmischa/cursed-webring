@@ -12,7 +12,7 @@ export class CursedMirror extends core.Construct {
       runtime: Runtime.SYNTHETICS_NODEJS_2_2,
       test: {
         code: Code.fromAsset(path.join(__dirname, "canary", "api-monitor.js")),
-        handler: "index.handler",
+        handler: "api-monitor.handler",
       },
       schedule: Schedule.rate(Duration.minutes(5)),
     });

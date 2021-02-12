@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="generator" content="Microsoft FrontPage 4.1" />
+
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
     <meta
       name="viewport"
@@ -11,6 +13,16 @@
     <meta name="description" content="Cursed webring" />
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+
+    <!-- opengoof -->
+    <meta property="og:url" content="https://www.cursed.lol" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mischa's Cursed Webring" />
+    <meta
+      property="og:description"
+      content="A webring comprising some of the most haunted and cursed websites on the internet."
+    />
+    <meta property="og:image" content="jesuswept.jpg" />
 
     <link
       rel="stylesheet"
@@ -26,7 +38,6 @@
       rel="stylesheet"
     />
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-EK6ZDSMHHL"
@@ -41,6 +52,7 @@
       gtag("config", "G-EK6ZDSMHHL");
     </script>
 
+    <!-- loading grapics -->
     <script>
       // -- https://xemantic.github.io/shader-web-background/
       const shaderWebBackground = {};
@@ -262,9 +274,7 @@
           });
           return g;
         }
-        shaderWebBackground.Error = class extends (
-          Error
-        ) {
+        shaderWebBackground.Error = class extends Error {
           constructor(a) {
             super(a);
             this.name = "shaderWebBackground.Error";
@@ -278,9 +288,7 @@
             this.name = "shaderWebBackground.ConfigError";
           }
         };
-        shaderWebBackground.GlError = class extends (
-          shaderWebBackground.Error
-        ) {
+        shaderWebBackground.GlError = class extends shaderWebBackground.Error {
           constructor(a) {
             super(a);
             this.name = "shaderWebBackground.GlError";
@@ -543,17 +551,9 @@
     <title>Mischa's Cursed Webring</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript
+      >You need to enable JavaScript to view this haunted website.</noscript
+    >
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
