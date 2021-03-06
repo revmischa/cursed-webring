@@ -5,6 +5,7 @@ import { NodejsFunction } from "@aws-cdk/aws-lambda-nodejs";
 import { LambdaIntegration, RestApi } from "@aws-cdk/aws-apigateway";
 import { Table } from "@aws-cdk/aws-dynamodb";
 import { CfnOutput } from "@aws-cdk/core";
+import { Tracing } from "@aws-cdk/aws-lambda";
 
 // ARN of a secret containing the slack webhook URL
 const slackWebhookSecret =
@@ -36,6 +37,7 @@ export class CursedSitesService extends core.Construct {
       defaultCorsPreflightOptions: {
         allowOrigins: apigateway.Cors.ALL_ORIGINS,
       },
+      deployOptions: { tracingEnabled: true },
     });
 
     // defines the /sites/ resource in our API
@@ -48,6 +50,7 @@ export class CursedSitesService extends core.Construct {
       {
         entry: "resources/cursedSites.ts",
         handler: "getAllHandler",
+        tracing: Tracing.ACTIVE,
       }
     );
     sitesResource.addMethod("GET", new LambdaIntegration(getAllSitesHandler));
